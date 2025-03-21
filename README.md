@@ -59,5 +59,5 @@ Where:
 - d is the distance between the two points in kilometers.
 
 ## PowerShell
-[Script](./PowerShell/DistanceBetweenAzureRegions.ps1)
+[Code](./PowerShell/DistanceBetweenAzureRegions.ps1)
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
