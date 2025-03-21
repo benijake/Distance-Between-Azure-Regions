@@ -47,19 +47,24 @@ $rows = @()
 # Filter the locations to include only physical regions
 foreach($_ in $locations)
 {
-    if($_.metadata.regionType -eq "Physical")
-    {
+   if($_.metadata.regionType -eq "Physical")
+   {
         $rows += [pscustomobject]@{
-            name = $_.Name
-            regionType = $_.metadata.regionType
-            regionCategory = $_.metadata.regionCategory
-            dataCenterLocation = $_.metadata.physicalLocation
-            numZones = $_.availabilityZones.count
-            longitude = $_.metadata.longitude
-            latitude = $_.metadata.latitude
-            pairedRegion = $_.metadata.pairedRegion
-        }
-    }
+            name= $_.Name; 
+            regionType=$_.metadata.regionType; 
+            regionCategory= $_.metadata.regionCategory;  
+            dataCenterLocation = $_.metadata.physicalLocation; 
+            numZones = $_.availabilityZoneMappings.count; 
+            physicalZones=($_.availabilityZoneMappings.physicalZone -join ","); 
+            longitude=$_.metadata.longitude; 
+            latitude=$_.metadata.latitude; 
+            pairedRegion = $_.metadata.pairedRegion.name; 
+            pairedDCLocation=""; 
+            pairedLongitude=0; 
+            pairedLatitude=0; 
+            distanceApart=0
+            }
+   }
 }
 
 # Calculate the distance between paired regions
