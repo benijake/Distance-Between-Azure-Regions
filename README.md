@@ -58,3 +58,6 @@ Where:
 - R is the Earth's radius (mean radius = 6,371 km).
 - d is the distance between the two points in kilometers.
 
+## PowerShell
+[Script](./PowerShell/DistanceBetweenAzureRegions.ps1)
+![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
