@@ -63,7 +63,7 @@ Where:
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
 ## Databricks PySpark Notebook
-Databricks has passthrough authentication so you might expect your user credentials would get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
+Databricks has passthrough authentication so you'd be forgiven for thinking that your user credentials would get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
 
 ``` python
 from azure.identity import *
@@ -79,5 +79,24 @@ headers = {
 response = requests.get(url, headers = headers)
 data = response.json()
 ```
+![errorMsg](./Databricks/errorMsg.png)
 
+Unfortunately, passthrough authentication only works for storage accounts, not REST APIs and databases.  If you go into Entra Id and look up the client id, you will see that the user assigned managed identity "dbmanagedidentity" that is associated with your workspace is being used instead.  
+![EntraClientId](./Databricks/dbmanagedidentity.png)
 
+As mentioned in the error message, dbmanagedidentity is missing the Reader RBAC role for the subscription:
+1. Open the access control blade for your subscription
+![subIAM](./Databricks/subIAM.png)
+
+2. Select the Reader role 
+![subReader](./Databricks/ReaderRole.png)
+
+3. Select managed identities and find dbmanagedidentity for your workspace under user assigned managed identities
+![roleMember](./Databricks/RoleMember.png)
+![selectManagedId](./Databricks/selectManagedIdentity.png)
+
+4. Review + Assign
+![reviewAndAssign](./Databricks/ReviewAndAssign.png)
+
+Now when we run the code again it executes successfully!
+![works](./Databricks/worksNow.png)
