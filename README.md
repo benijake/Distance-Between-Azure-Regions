@@ -63,6 +63,17 @@ Where:
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
 ## Databricks PySpark Notebook
+# Required libraries:
+- azure-identity
+- azure-mgmt-resource
+
+You can either install these on your cluster (recommended unless it's a one-off exercise):
+![installLibraries](./Databricks/installLibraries.png)
+
+Or run ```%pip install azure-identity azure-mgmt-resource``` in a cell in your notebook:
+![pipInstall](./Databricks/pipInstall.png)
+
+# Solution
 Databricks has passthrough authentication so you'd be forgiven for thinking that your user credentials would get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
 
 ``` python
@@ -159,3 +170,6 @@ df_with_distance = df_with_paired_location.withColumn("distance", round(6371 * a
 display(df_with_distance.orderBy("regionCategory", "distance", ascending=False))
 ```
 ![withDistance](./Databricks/withDistance.png)
+
+# Code
+You can download the complete notebook [here](./Databricks/CallRESTApi.ipynb)
