@@ -77,7 +77,7 @@ headers = {
     "Content-Type": "application/json"
 }
 response = requests.get(url, headers = headers)
-data = response.json()![image](https://github.com/user-attachments/assets/6063418c-21e5-40ee-92da-5e4e248721af)
+data = response.json()
 ```
 
 
