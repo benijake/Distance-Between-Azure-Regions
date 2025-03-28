@@ -59,8 +59,10 @@ Where:
 - d is the distance between the two points in kilometers.
 
 ## PowerShell
-[Code](./PowerShell/DistanceBetweenAzureRegions.ps1)
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
+
+### Code
+You can find the code [here](./PowerShell/DistanceBetweenAzureRegions.ps1)
 
 ## Databricks PySpark Notebook
 ### Required libraries:
