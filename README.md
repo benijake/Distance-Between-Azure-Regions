@@ -100,3 +100,62 @@ As mentioned in the error message, dbmanagedidentity is missing the Reader RBAC 
 
 Now when we run the code again it executes successfully!
 ![works](./Databricks/worksNow.png)
+
+Let's modify the code to automatically retrieve the subscription id for our workspace
+
+``` python
+from azure.mgmt.resource import SubscriptionClient
+from azure.identity import *
+credential = DefaultAzureCredential()
+subscription_client = SubscriptionClient(credential)
+subs = list(subscription_client.subscriptions.list())
+subscriptionId = subs[0].subscription_id
+
+import requests
+url = f"https://management.azure.com/subscriptions/{subscriptionId}/locations?api-version=2022-12-01"
+
+# Set the authorization header
+headers = {
+    "Authorization": f"Bearer {credential.get_token('https://management.azure.com/.default').token}",
+    "Content-Type": "application/json"
+}
+
+response = requests.get(url, headers = headers)
+data = response.json()
+```
+
+Next we will load the data into a spark dataframe and convert the json to columns
+``` python
+df = spark.read.json(spark.sparkContext.parallelize([data]))
+df_flattened = df.selectExpr("explode(value) as location").select("location.*").where("metadata.regionType == 'Physical'").selectExpr("name", "metadata.regionCategory as regionCategory", "metadata.physicalLocation as dataCenterLocation", "size(availabilityZoneMappings) as numZones","metadata.longitude as longitude", "metadata.latitude as latitude", "metadata.pairedRegion.name[0] as pairedRegion")
+
+display(df_flattened)
+```
+![jsonToColumns](./Databricks/df_flattened.png)
+
+Now that we have the data in table format we can join it to itself on the paired region column to get longitude and latitude for the paired region
+``` python
+from pyspark.sql.functions import *
+# Create a lookup DataFrame for paired regions
+paired_df = df_flattened.selectExpr("name as pairedRegionName", "longitude as pairedLongitude", "latitude as pairedLatitude"
+)
+
+# Perform a self join to add the pairedLongitude and pairedLatitude columns
+df_with_paired_location = df_flattened.join(
+    paired_df,
+    df_flattened.pairedRegion == paired_df.pairedRegionName,
+    "left"
+).drop("pairedRegionName")
+
+# Display the DataFrame
+display(df_with_paired_location)
+```
+![pairedLatLong](./Databricks/pairedLatLong.png)
+
+Finally, we add the distance calculation
+``` python
+df_with_distance = df_with_paired_location.withColumn("distance", round(6371 * acos(cos(radians(df_with_paired_location.latitude)) * cos(radians(df_with_paired_location.pairedLatitude)) * cos(radians(df_with_paired_location.longitude) - radians(df_with_paired_location.pairedLongitude)) + sin(radians(df_with_paired_location.latitude)) * sin(radians(df_with_paired_location.pairedLatitude))), 2))
+
+display(df_with_distance.orderBy("regionCategory", "distance", ascending=False))
+```
+![withDistance](./Databricks/withDistance.png)
