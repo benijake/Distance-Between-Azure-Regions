@@ -63,4 +63,21 @@ Where:
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
 ## Databricks PySpark Notebook
+Databricks has passthrough authentication so you might expect your user credentials to get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
+
+``` python
+from azure.identity import *
+import requests
+subscriptionId = "XXXX-XXXX-XXXX-XXXX-XXXX"
+url = f"https://management.azure.com/subscriptions/{subscriptionId}/locations?api-version=2022-12-01"
+credential = DefaultAzureCredential()
+# Set the authorization header
+headers = {
+    "Authorization": f"Bearer {credential.get_token('https://management.azure.com/.default').token}",
+    "Content-Type": "application/json"
+}
+response = requests.get(url, headers = headers)
+data = response.json()![image](https://github.com/user-attachments/assets/6063418c-21e5-40ee-92da-5e4e248721af)
+```
+
 
