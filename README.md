@@ -63,7 +63,7 @@ Where:
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
 ## Databricks PySpark Notebook
-Databricks has passthrough authentication so you might expect your user credentials to get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
+Databricks has passthrough authentication so you might expect your user credentials would get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
 
 ``` python
 from azure.identity import *
