@@ -59,11 +59,13 @@ Where:
 - d is the distance between the two points in kilometers.
 
 ## PowerShell
-[Code](./PowerShell/DistanceBetweenAzureRegions.ps1)
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
+### Code
+You can find the code [here](./PowerShell/DistanceBetweenAzureRegions.ps1)
+
 ## Databricks PySpark Notebook
-# Required libraries:
+### Required libraries:
 - azure-identity
 - azure-mgmt-resource
 
@@ -73,7 +75,9 @@ You can either install these on your cluster (recommended unless it's a one-off 
 Or run ```%pip install azure-identity azure-mgmt-resource``` in a cell in your notebook:
 ![pipInstall](./Databricks/pipInstall.png)
 
-# Solution
+Note: The solution below assumes that your workpace is enabled for Unity Catalog
+
+### Solution
 Databricks has passthrough authentication so you'd be forgiven for thinking that your user credentials would get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
 
 ``` python
@@ -171,5 +175,5 @@ display(df_with_distance.orderBy("regionCategory", "distance", ascending=False))
 ```
 ![withDistance](./Databricks/withDistance.png)
 
-# Code
+### Code
 You can download the complete notebook [here](./Databricks/CallRESTApi.ipynb)
