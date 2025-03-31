@@ -78,7 +78,7 @@ Or run ```%pip install azure-identity azure-mgmt-resource``` in a cell in your n
 Note: The solution below assumes that your workpace is enabled for Unity Catalog
 
 ### Solution
-Databricks has passthrough authentication so you'd be forgiven for thinking that your user credentials would get passed through to the REST API the same way that it does to a data lake. However, if you run the code below, you'll get an authorization error.
+Before Unity Catalog, Databricks used to support [passthrough authentication](https://learn.microsoft.com/en-us/azure/databricks/archive/credential-passthrough/adls-passthrough#enable-azure-data-lake-storage-credential-passthrough-for-a-high-concurrency-cluster) so you'd be forgiven for thinking that your user credentials would get passed through to the REST API the same way that they do to a data lake. However, if you run the code below, you'll get an authorization error.
 
 ``` python
 from azure.identity import *
