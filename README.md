@@ -61,6 +61,10 @@ Where:
 - R is the Earth's radius (mean radius = 6,371 km).
 - d is the distance between the two points in kilometers.
 
+Solutions:
+- [PowerShell](#powershell)
+- [Databricks](#databricks-pyspark-notebook)
+
 ## PowerShell
 Since the Haversine formula that computes distances based on radians not degrees, we will first create a function that converts degrees to radians
 ``` PowerShell
