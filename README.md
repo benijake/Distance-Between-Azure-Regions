@@ -1,5 +1,8 @@
-# Distance-Between-Azure-Regions
-How to check the distance between paired primary and secondary Azure regions
+# Which Azure regions offer multiple availability zones? What's the distance between each Azure region and its paired secondary?
+Implementing [zonal and regional redundancy](https://learn.microsoft.com/en-us/azure/well-architected/reliability/regions-availability-zones) can significantly minimize operational impact on your business. By ensuring high availability and fault isolation, zonal redundancy reduces the risk of localized disruptions and downtime for mission-critical applications. Regional redundancy, on the other hand, provides a robust [disaster recovery](https://learn.microsoft.com/en-us/azure/well-architected/reliability/disaster-recovery) solution, ensuring that your applications remain available even in the event of a regional failure.
+
+- How can you identify which Azure regions offer multiple availability zones? 
+- Which Azure regions have a paired secondary region and what's the distance between them?
 
 ## List-Locations API
 Using the [List-Locations API](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?view=rest-resources-2022-12-01&tabs=HTTP) we can get a list of all Azure regions, their availability zones, latitude and longitude and the paired secondary region
