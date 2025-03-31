@@ -144,7 +144,7 @@ foreach($_ in $locations)
 }
 ```
 
-Now that we've got each location loaded into our array, we can loop through and add latitude and longitude for the paired secondary and calculate the distance between them calling our Get-Distance function
+Now that we've got each location loaded into our array, we can loop through and add latitude and longitude for the paired secondary and calculate the distance between them by calling our Get-Distance function
 ``` PowerShell
 # Calculate the distance between paired regions
 foreach($row in $rows)
