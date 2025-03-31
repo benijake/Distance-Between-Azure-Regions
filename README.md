@@ -163,7 +163,7 @@ foreach($row in $rows)
 }
 ```
 
-Finally, we output the object array to the console as nicely formated table
+Finally, we output the object array to the console as a nicely formated table
 ``` PowerShell
 # Sort the results and format the output
 $rows | Sort-Object -Property regionCategory, distanceApart -Descending |
