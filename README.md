@@ -116,6 +116,9 @@ As mentioned in the error message, dbmanagedidentity is missing the Reader RBAC 
 Now when we run the code again it executes successfully!
 ![works](./Databricks/worksNow.png)
 
+Alternatively, you can replace the call to ```DefaultAzureCredential()``` with ```DeviceCodeCredential()``` to use your authenticated local user instead:
+![works](./Databricks/DeviceCodeCredential.png)
+
 Let's modify the code to automatically retrieve the subscription id for our workspace
 
 ``` python
@@ -124,7 +127,11 @@ from azure.identity import *
 credential = DefaultAzureCredential()
 subscription_client = SubscriptionClient(credential)
 subs = list(subscription_client.subscriptions.list())
-subscriptionId = subs[0].subscription_id
+
+if subs:
+    subscriptionId = subs[0].subscription_id
+else:
+    print("No subscriptions found.")
 
 import requests
 url = f"https://management.azure.com/subscriptions/{subscriptionId}/locations?api-version=2022-12-01"
@@ -176,4 +183,6 @@ display(df_with_distance.orderBy("regionCategory", "distance", ascending=False))
 ![withDistance](./Databricks/withDistance.png)
 
 ### Code
-You can download the complete notebook [here](./Databricks/CallRESTApi.ipynb)
+You can download the complete notebooks here:
+Authentication with [workspace user-assigned managed identity](./Databricks/CallRESTApi.ipynb)
+Authentication with local user using a [device code](./Databricks/CallRESTAPIDeviceCode.ipynb)
