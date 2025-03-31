@@ -184,5 +184,5 @@ display(df_with_distance.orderBy("regionCategory", "distance", ascending=False))
 
 ### Code
 You can download the complete notebooks here:
-Authentication with [workspace user-assigned managed identity](./Databricks/CallRESTApi.ipynb)
-Authentication with local user using a [device code](./Databricks/CallRESTAPIDeviceCode.ipynb)
+- Authentication with [workspace user-assigned managed identity](./Databricks/CallRESTApi.ipynb)
+- Authentication with local user using a [device code](./Databricks/CallRESTAPIDeviceCode.ipynb)
