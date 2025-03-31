@@ -168,7 +168,7 @@ $rows | Sort-Object -Property regionCategory, distanceApart -Descending |
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
 ### Code
-You can find the PowerShell script [here](./PowerShell/DistanceBetweenAzureRegions.ps1)
+You can download the full PowerShell script [here](./PowerShell/DistanceBetweenAzureRegions.ps1)
 
 ## Databricks PySpark Notebook
 ### Required libraries:
