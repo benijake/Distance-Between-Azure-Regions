@@ -66,6 +66,11 @@ Where:
 - [Databricks](#databricks-pyspark-notebook)
 
 ## PowerShell
+### Required:
+- PowerShell version 7 or higher
+- Az module
+  
+### Solution
 Since the Haversine formula that computes distances based on radians not degrees, we will first create a function that converts degrees to radians
 ``` PowerShell
 function ToRadians {
