@@ -232,7 +232,7 @@ Now when we run the code again it executes successfully!
 ![works](./Databricks/worksNow.png)
 
 Alternatively, you can replace the call to ```DefaultAzureCredential()``` with ```DeviceCodeCredential()``` to authenticate with a user account in a browser tab instead:
-![works](./Databricks/DeviceCodeCredential.png)
+![deviceCode](./Databricks/DeviceCodeCredential.png)
 
 Let's modify the code to automatically retrieve the subscription id for our workspace
 
