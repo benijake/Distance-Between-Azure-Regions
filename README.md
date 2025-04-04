@@ -177,8 +177,9 @@ $rows | Sort-Object -Property regionCategory, distanceApart -Descending |
 ![PowerShellScriptOutput](./PowerShell/AzureRegions.png)
 
 ### Code
-- You can download the full PowerShell script [here](./PowerShell/DistanceBetweenAzureRegions.ps1)
-- If you don't need availability zones per region, you can call the cmdlet [Get-AzLocation](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azlocation?view=azps-13.3.0) in the [code](./PowerShell/DistanceBetweenAzureRegionsCmdlet.ps1) instead.
+You can download the PowerShell scripts here:
+- Call the [REST API](./PowerShell/DistanceBetweenAzureRegions.ps1) to get region and availability zones per region 
+- Call the [cmdlet](./PowerShell/DistanceBetweenAzureRegionsCmdlet.ps1) Get-AzLocation if you don't need availability zones info
 
 ## Databricks PySpark Notebook
 ### Required libraries:
